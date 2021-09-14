@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.senai.dao.PacienteDao;
 import org.senai.db.*;
 import org.senai.model.Paciente;
 @WebServlet("/cadastroServlet")
@@ -26,7 +27,8 @@ public class cadastroServlet extends HttpServlet {
 		ObjP.setInicioPrevisto(req.getParameter("inicio-previsto"));
 		ObjP.setInicioCirurgia(req.getParameter("inicio-cirurgia"));
 		ObjP.setSaidaCirurgia(req.getParameter("fim-cirurgia"));
-		ObjP.setSaidaPrevisto(req.getParameter("saida-prevista"));
+		ObjP.setSaidaPrevisto(req.getParameter("saida-prevista")); 
+		ObjP.setId(Integer.parseInt(req.getParameter("id")));
 		
 	//	String nome = req.getParameter("nome");
 	//	String status = req.getParameter("status");
@@ -50,43 +52,31 @@ public class cadastroServlet extends HttpServlet {
 		
 		
 		
-	try {
-		
-			Connection cont = conexao.conectar();
-			
-			if (cont != null) {
-			
-		
-		
+	PacienteDao objDao = new PacienteDao();
 	
-		//	saida.println("Conexão estabelecida");
-			String sql = "insert into paciente (nome, status, sala, inicioprevisto, inicioCirurgia, saidaCirurgia, saidaPrevista)" 
-				+ "values ('"+ObjP.getNome()+"','"+ObjP.getStatus()+"','"+ObjP.getLocal()+"','"+ObjP.getInicioPrevisto()+"','"+ObjP.getInicioCirurgia()+"','"+ObjP.getSaidaCirurgia()+"','"+ObjP.getSaidaPrevisto()+"')";
-	
-	PreparedStatement pst = cont.prepareStatement(sql);
-	pst.execute();
-	pst.close();
-	cont.close();
+	if(ObjP.getId() > 0 ) {
+		objDao.alterar(ObjP);
+	}else {
 	
 	
-	
-	
+	if (objDao.adicionar(ObjP)) {
 		res.sendRedirect("listaPaciente.jsp");
-			}else {	
-				PrintWriter saida = res.getWriter();
-				saida.println("<html>");
-				saida.println("Erro de conexão");
-				saida.println("</html>");
+		
+		
+		
+	}else {
+		
+		PrintWriter saida = res.getWriter();
+		saida.println("<html>");
+		saida.println("Erro de conexão");
+		saida.println("</html>");
+		
+		
 			}
- 
-	} catch (Exception e) {
-			
-		e.printStackTrace();
-		}
 			
 	
 		
 		
+		}
 	}
-
 }

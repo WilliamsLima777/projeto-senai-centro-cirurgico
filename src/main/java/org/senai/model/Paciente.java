@@ -1,14 +1,14 @@
 package org.senai.model;
 
 public class Paciente {
-	private int id;
-	private String nome;
-	private String status;
-	private String local;
-	private String inicioPrevisto;
-	private	String inicioCirurgia;
-	private	String saidaCirurgia;
-	private	String saidaPrevisto;
+	private int id ;
+	private String nome = "";
+	private String status = "";
+	private String local = "";
+	private String inicioPrevisto = "";
+	private	String inicioCirurgia = "";
+	private	String saidaCirurgia = "";
+	private	String saidaPrevisto = "";
 	
 	
 	public int getId() {

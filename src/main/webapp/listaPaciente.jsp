@@ -1,3 +1,6 @@
+<%@page import="org.senai.model.Paciente"%>
+<%@page import="java.util.List"%>
+<%@page import="org.senai.dao.PacienteDao"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="org.senai.db.conexao"%>
@@ -8,20 +11,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Lista Paciente</title>
 </head>
 <body>
 <%
 
-Connection cont = conexao.conectar();
+PacienteDao objDao = new PacienteDao();
+List<Paciente> ls = objDao.listaPaciente();
 
-if (cont != null){
-	PreparedStatement pst = cont.prepareStatement("select * from paciente");
-	ResultSet rs = pst.executeQuery();
+if (ls.size() > 0){
+	
 %>
 <table class="table table-hover">
 			<thead>
 				<tr>
+					<th width="10%">ID</th>
 					<th width="40%">Nome do Paciente</th>
 					<th width="30%">Status</th>
 					<th width="30%">Sala</th>
@@ -29,59 +33,68 @@ if (cont != null){
 					<th width="10%">Início da Cirurgia</th>
 					<th width="10%">Fim da Cirurgia</th>
 					<th width="10%">Saída Prevista</th>
+					
 				</tr>
 				
-				<% while(rs.next()){ %>
+				<% for(Paciente p : ls){ %>
 				<tr>
-					<td>
-					<% 
+				<td>
+					<%=
 					
-					out.print(rs.getString("nome"));						
+					p.getId() 						
 					%>
 					
 					</td>
 					<td>
-					<% 
+					<%=
 					
-					out.print(rs.getString("status"));						
+					p.getNome() 						
 					%>
 					
 					</td>
 					<td>
-					<% 
+					<%=
 					
-					out.print(rs.getString("sala"));						
+					p.getStatus()						
 					%>
 					
 					</td>
 					<td>
-					<% 
+					<%= 
 					
-					out.print(rs.getString("inicioPrevisto"));						
+					p.getLocal()						
 					%>
 					
 					</td>
 					<td>
-					<% 
+					<%=
 					
-					out.print(rs.getString("inicioCirurgia"));						
+					p.getInicioPrevisto()						
 					%>
 					
 					</td>
 					<td>
-					<% 
+					<%= 
 					
-					out.print(rs.getString("saidaCirurgia"));						
+					p.getInicioCirurgia()						
 					%>
 					
 					</td>
 					<td>
-					<% 
+					<%=
 					
-					out.print(rs.getString("saidaPrevista"));						
+					p.getSaidaCirurgia()						
 					%>
 					
 					</td>
+					<td>
+					<%=
+					
+					p.getSaidaPrevisto()						
+					%>
+					
+					</td>
+					<td><a href =gerenciarPaciente.jsp?id=<%=p.getId()%>>Editar</a></td>
 					
 				
 				</tr>
@@ -92,7 +105,7 @@ if (cont != null){
 			</tbody>
 		</table>
 <%}
-cont.close();
+
 %>
 </body>
 </html>
