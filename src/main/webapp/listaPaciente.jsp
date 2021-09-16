@@ -36,65 +36,66 @@ if (ls.size() > 0){
 					
 				</tr>
 				
-				<% for(Paciente p : ls){ %>
+				<% for(Paciente ps : ls){ %>
 				<tr>
 				<td>
 					<%=
 					
-					p.getId() 						
+					ps.getId() 						
 					%>
 					
 					</td>
 					<td>
 					<%=
 					
-					p.getNome() 						
+					ps.getNome() 						
 					%>
 					
 					</td>
 					<td>
 					<%=
 					
-					p.getStatus()						
+					ps.getStatus()						
 					%>
 					
 					</td>
 					<td>
 					<%= 
 					
-					p.getLocal()						
+					ps.getLocal()						
 					%>
 					
 					</td>
 					<td>
 					<%=
 					
-					p.getInicioPrevisto()						
+					ps.getInicioPrevisto()						
 					%>
 					
 					</td>
 					<td>
 					<%= 
 					
-					p.getInicioCirurgia()						
+					ps.getInicioCirurgia()						
 					%>
 					
 					</td>
 					<td>
 					<%=
 					
-					p.getSaidaCirurgia()						
+					ps.getSaidaCirurgia()						
 					%>
 					
 					</td>
 					<td>
 					<%=
 					
-					p.getSaidaPrevisto()						
+					ps.getSaidaPrevisto()						
 					%>
 					
 					</td>
-					<td><a href =gerenciarPaciente.jsp?id=<%=p.getId()%>>Editar</a></td>
+					<td><a href =gerenciarPaciente.jsp?id=<%=ps.getId()%>>Editar</a></td>
+					<td><a href =cadastroServlet?acao=apagar&id=<%=ps.getId()%>>Apagar</a></td>
 					
 				
 				</tr>

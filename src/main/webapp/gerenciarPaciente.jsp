@@ -34,7 +34,7 @@ p = dao.getPaciente(id);
 		<br>
 		<h2>Gerenciar Painel dos Paciente no Centro Cirúrgico</h2>
 		<form name="form-paciente" id="form-paciente" action ="cadastroServlet" method ="post"> 
-			<input type="hidden" id="id"  value ="<%=p.getId()%>" name="id">
+			<input type="hidden" id="id"  value ="<%=p.getId() %>" name="id">
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="nome">Nome Paciente:</label> <input type="text"
@@ -89,23 +89,8 @@ p = dao.getPaciente(id);
 		
 		</script>
 
-		<br>
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th width="40%">Nome do Paciente</th>
-					<th width="30%">Status</th>
-					<th width="30%">Sala</th>
-					<th width="10%">Início Prevísto</th>
-					<th width="10%">Início da Cirurgia</th>
-					<th width="10%">Fim da Cirurgia</th>
-					<th width="10%">Saída Prevista</th>
-				</tr>
-			</thead>
-			<tbody id="corpo-tabela" style="cursor: pointer;">
-
-			</tbody>
-		</table>
+		
+		
 
 		<script type="text/javascript">
 			var tabela = localStorage.getItem('corpo-tabela');
@@ -113,6 +98,6 @@ p = dao.getPaciente(id);
 		</script>
 
 	</div>
-
+	<%@ include file="listaPaciente.jsp" %> 
 </body>
 </html>

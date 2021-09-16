@@ -122,7 +122,7 @@ public class PacienteDao {
 	
 	public boolean alterar(Paciente objP) {
 		
-try {
+		try {
 			
 			Connection cont = conexao.conectar();
 			
@@ -144,24 +144,20 @@ try {
 					+ "id   =?";
 				
 	
-	PreparedStatement pst = cont.prepareStatement(sql);
-	pst.setString(1,objP.getNome());
-	pst.setString(2,objP.getStatus());
-	pst.setString(3,objP.getLocal());
-	pst.setString(4,objP.getInicioPrevisto());
-	pst.setString(5,objP.getInicioCirurgia());
-	pst.setString(6,objP.getSaidaCirurgia());
-	pst.setString(7,objP.getSaidaPrevisto());
-	pst.setInt(8,objP.getId());
+			PreparedStatement pst = cont.prepareStatement(sql);
+			pst.setString(1,objP.getNome());
+			pst.setString(2,objP.getStatus());
+			pst.setString(3,objP.getLocal());
+			pst.setString(4,objP.getInicioPrevisto());
+			pst.setString(5,objP.getInicioCirurgia());
+			pst.setString(6,objP.getSaidaCirurgia());
+			pst.setString(7,objP.getSaidaPrevisto());
+			pst.setInt(8,objP.getId());
 	
-	pst.execute();
-	pst.close();
-	cont.close();
+			pst.execute();
+			pst.close();
+			cont.close();
 	
-	
-	
-	
-		
 			return true;
  
 	} catch (Exception e) {
@@ -171,6 +167,41 @@ try {
 		
 		return false;
 	}
+	
+	public boolean apagar(int id) {
+		
+		try {
+			
+			Connection cont = conexao.conectar();
+			
+		
+			
+		
+		
+	
+		//	saida.println("Conexão estabelecida");
+			String sql = "delete from paciente where id =?";
+				
+				
+	
+			PreparedStatement pst = cont.prepareStatement(sql);
+			
+			pst.setInt(1,id);
+	
+			pst.execute();
+			pst.close();
+			cont.close();
+			return true;
+ 
+		} catch (Exception e) {
+			
+		e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	
 		
 	}
 
